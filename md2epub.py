@@ -10,7 +10,7 @@
 
 
 import urllib, re, os, zipfile, glob, shutil, sys, markdown2, string, datetime
-from smartypants import smartyPants
+from smartypants import smartypants
 
 class Chapter:
 	title = ''
@@ -142,12 +142,12 @@ class EPub:
 			if self.css:
 				f.write('\n\t<link rel="stylesheet" type="text/css" href="../' + self.css + '" />')
 			f.write('''
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" /> 
+<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
 </head>
 <body>''')
 
 			# write the Markdowned text
-			htmltext = smartyPants(markdown2.markdown(sourcetext))
+			htmltext = smartypants(markdown2.markdown(sourcetext))
 			f.write(htmltext.encode('utf-8'))
 
 			# write HTML footer
@@ -397,7 +397,7 @@ def process_book(filename):
 
 			# for the ID, lowercase it all, strip punctuation, and replace spaces with underscores
 			chapter.id = re.sub(r'[^a-zA-Z0-9]', r'', chapter.title.lower()).replace(' ', '_')
-			
+
 			# if there's no ID left (because the chapter title is all Unicode, for example),
 			# use the basename of the file instead
 			if not chapter.id:
