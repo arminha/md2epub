@@ -6,8 +6,8 @@ The EPUB-generation code is based on Matt Turner's [GetBook.py](http://staff.was
 
 ### Dependencies
 
-* [python-markdown2](http://code.google.com/p/python-markdown2/)
-* [smartypants.py](http://web.chad.org/projects/smartypants.py/)
+* [python-markdown2](https://github.com/trentm/python-markdown2/)
+* [smartypants.py](https://github.com/leohemsted/smartypants.py)
 
 ### Usage
 
