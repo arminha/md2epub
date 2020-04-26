@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 #
 # md2epub.py
 #
@@ -9,7 +9,7 @@
 # http://staff.washington.edu/mdturner/personal.htm
 
 
-import urllib, re, os, zipfile, glob, shutil, sys, markdown2, string, datetime
+import re, os, zipfile, glob, shutil, sys, markdown2, string, datetime
 from smartypants import smartypants
 
 class Chapter:
@@ -75,7 +75,7 @@ class EPub:
 			if id not in self.chapterids:
 				self.chapterids.append(id)
 			else:
-				print 'Duplicate ID: %s' % (id)
+				print('Duplicate ID: %s' % (id))
 				sys.exit(-1)
 
 			# Write it out
@@ -127,7 +127,7 @@ class EPub:
 					os.mkdir(chapter.dirname)
 				f = open(chapter.dirname + '/' + chapter.htmlfile, 'w')
 			except:
-				print 'Error reading file "%s" from table of contents.' % chapter.filename
+				print('Error reading file "%s" from table of contents.' % chapter.filename)
 				sys.exit(-1)
 			sourcetext = input.read()
 			input.close()
@@ -148,7 +148,7 @@ class EPub:
 
 			# write the Markdowned text
 			htmltext = smartypants(markdown2.markdown(sourcetext))
-			f.write(htmltext.encode('utf-8'))
+			f.write(htmltext)
 
 			# write HTML footer
 			f.write('''
@@ -281,7 +281,7 @@ class EPub:
 			# if there's a CSS file, copy it in
 			if self.css:
 				if not os.path.exists('../../' + self.css):
-					print "CSS file doesn't exist."
+					print("CSS file doesn't exist.")
 					sys.exit(-1)
 				css = open('../../' + self.css, 'r')
 				csstext = css.read()
@@ -297,7 +297,7 @@ class EPub:
 			# copy cover art into the directory
 			if self.cover:
 				if not os.path.exists('../../' + self.cover):
-					print "Cover art file doesn't exist."
+					print("Cover art file doesn't exist.")
 					sys.exit(-1)
 				destdir = os.path.dirname(self.cover)
 				if not os.path.exists(destdir):
@@ -330,7 +330,7 @@ class EPub:
 			# fix for Windows file handle locking
 			os.chdir(cwd)
 		except:
-			print "Unexpected error: ", sys.exc_info()[0]
+			print("Unexpected error: ", sys.exc_info()[0])
 
 			# if something went wrong, remove the temp directory
 			os.chdir(cwd)
@@ -413,8 +413,8 @@ def process_book(filename):
 			# add the current chapter
 			add_chapter(chapter, epub.children, depth)
 		else:
-			print "Error on the following line:\n"
-			print line
+			print("Error on the following line:\n")
+			print(line)
 			sys.exit(-1)
 
 	fh.close()
